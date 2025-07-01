@@ -1,0 +1,18 @@
+salesforce:
+  username: "your_user"
+  password: "your_pass"
+  security_token: "your_token"
+  domain: "login"  # or "test" for sandbox
+  object: "Contact"  # The Salesforce object to pull from
+  soql: "SELECT Id, MRN__c, FirstName, LastName, DOB__c, Gender__c, Address__c FROM Contact"
+
+mysql:
+  host: "localhost"
+  port: 3306
+  user: "root"
+  password: "yourpassword"
+  database: "patients"
+  table: "patient_records"
+
+output_csv: "mocked_patients.csv"
+mock_key: "MRN"  # The field to use for mapping real-to-fake identities

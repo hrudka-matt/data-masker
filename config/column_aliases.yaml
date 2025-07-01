@@ -1,0 +1,43 @@
+mrn:
+  - mrn
+  - medrec
+  - medrec#
+  - mrnum
+  - medical record number
+  - medical #
+  - patient id
+  - patient #
+  - patient identifier
+
+first_name:
+  - first_name
+  - fname
+  - first
+  - f name
+  - given name
+
+last_name:
+  - last_name
+  - lname
+  - last
+  - l name
+  - surname
+  - family name
+
+dob:
+  - dob
+  - date_of_birth
+  - date of birth
+  - birthdate
+  - birth date
+
+gender:
+  - gender
+  - sex
+
+address:
+  - address
+  - addr
+  - addr.
+  - home address
+  - office address

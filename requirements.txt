@@ -1,0 +1,5 @@
+simple-salesforce
+mysql-connector-python
+pandas
+pyyaml
+Faker
