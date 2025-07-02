@@ -1,84 +1,76 @@
-# Patient Data Mocking Utility
+# Patient-Mocker
 
-This utility connects to Salesforce and MySQL, fetches patient records, creates consistent fake data (mocking PHI/PII fields), and exports a combined CSV file for safe use in development or analytics.
+## Overview
+
+Patient-Mocker is a Python project designed to securely fetch patient data from Salesforce and associated MySQL databases, then generate masked (faker) versions of that data to protect sensitive information while preserving relational integrity.
 
 ## Features
 
-- Connects to Salesforce and/or MySQL (configurable)
-- Identifies unique patients and generates fake PHI/PII (names, MRNs, etc.)
-- Replaces original values with consistent fake data
-- Outputs a single CSV with combined, mocked records
-- Modular, easily extended for more data sources or custom fields
+- Connects to Salesforce using OAuth client credentials.
+- Queries patient records from Salesforce.
+- Queries related patient data from multiple MySQL tables based on Salesforce patient IDs.
+- Applies consistent Faker-based data masking across all datasets.
+- Outputs both real and masked data CSVs for auditing and testing.
+- Supports configurable environment variables and secret retrieval via Clark Auth.
 
-## Getting Started
-
-### 1. Clone and Set Up
-
-```bash
-git clone https://github.com/your-org/patient-mocker.git
-cd patient-mocker
-python -m venv venv
-venv\Scripts\activate   
-pip install -r requirements.txt
+## File Structure
 ```
-
-2. Configure Connections
-
-Edit config.yaml and provide:
-
-    Salesforce API credentials (client ID/secret, username, password/token)
-
-    MySQL connection string
-
-You can use dummy/test values or skip any source you don't need for now.
-3. Run
-```bash
-python main.py
-
-#mock patients dry run with local data
-python mock_patients.py
-
-##Test Plan
-python -m tests.test_mocking
-```
-Output will be saved as mocked_patients.csv by default.
-
-4. Directory Structure
-```
-patient-mocker/
-│
+Patient-Mocker/
 ├── config/
-│   ├── column_aliases.yaml      # <-- YAML with column alias mappings
-│   └── config.yaml             # (optional: other configuration)
-│
+│ ├── column_aliases.yaml
 ├── connectors/
-│   ├── mysql.py
-│   └── salesforce.py
-│
-├── tests/
-│   ├── test_data/
-│   │   ├── mysql_example.csv
-│   │   └── salesforce_example.csv
-│   └── test_mocking.py
-│
+│ ├── salesforce.py
+│ ├── mysql.py
 ├── utils/
-│   ├── faker_map.py
-│   ├── io.py
-│   └── normalizer.py
-│
-├── main.py                  # (optional: main entry point for config-driven run)
-├── mock_patients.py         # CLI entry: run mocker from CSVs
+│ ├── init.py
+│ ├── faker_map.py
+│ ├── io.py
+│ ├── normalizer.py
+├── env.clark
+├── .env
+├── main.py
+├── mock_salesforcesql.py
 ├── requirements.txt
-└── README.md
+├── README.md
+```
+## Setup Instructions
+
+1. **Clone or download the repository** to your local machine.
+
+2. **Install dependencies:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Set up environment variables:
+
+    Create `.env.clark` file
+
+    Create a file named `.env.clark` in the root of this project containing the following environment variables:
+
+    ```env
+    CLARK_AUTH_PROJECT_ID=your_project_id_here
+    CLARK_AUTH_CLIENT_ID=your_client_id_here
+    CLARK_AUTH_CLIENT_SECRET=your_client_secret_here
+    CLARK_AUTH_USER_NAME=your_user_email_here
+    CLARK_AUTH_PASSWORD=your_password_here
+    CLARK_AUTH_EMAIL=your_email_here  # optional, defaults to USER_NAME if omitted
+    ```
+
+Note: These values can be obtained from your Clark Auth dashboard or administrator.
+
+5. Run the data masking script:
+
+All scripts automatically load .env.clark to authenticate with Clark Auth and fetch required secrets.
+
+Mock patient data and assessments:
 
 ```
+python mock_patients.py
+```
+Mock Salesforce and related SQL tables:
 
-5. Customization
-
-    Adjust fields in column_aliases.yaml to all the potential variations that could be found.
-
-    Extend connectors or add new ones under connectors/
-
-    Tweak the output format as needed in utils/io.py
-
-    adjust the args parameters to point to a different file location
+```
+python mock_salesforcesql.py
+```

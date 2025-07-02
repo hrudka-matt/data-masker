@@ -2,7 +2,6 @@ import sys
 import os
 import pandas as pd
 
-# Make sure we can import from ../utils
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from utils.faker_map import make_faker_map, apply_faker

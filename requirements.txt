@@ -3,3 +3,6 @@ mysql-connector-python
 pandas
 pyyaml
 Faker
+python-dotenv
+sqlalchemy
+requests
