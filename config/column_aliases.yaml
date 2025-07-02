@@ -15,7 +15,7 @@ first_name:
   - first
   - f name
   - given name
-
+  
 last_name:
   - last_name
   - lname
@@ -23,6 +23,7 @@ last_name:
   - l name
   - surname
   - family name
+  - last_name__c_sf
 
 dob:
   - dob
@@ -30,6 +31,8 @@ dob:
   - date of birth
   - birthdate
   - birth date
+  - dob__c_sf
+  - patient_date_of_birth_date_time_mysql
 
 gender:
   - gender
@@ -41,3 +44,13 @@ address:
   - addr.
   - home address
   - office address
+
+practice_guid:
+  - practice_guid
+  - practice_guid__c
+  - practiceguid
+  - practice_guidc
+  - practice_guid_sf
+  - practice_guid_mysql
+  
+
